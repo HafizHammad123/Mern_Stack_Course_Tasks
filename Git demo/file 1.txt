@@ -1,5 +1,0 @@
-<<<<<<< HEAD
-added a change in master branch
-=======
-I have implemente this feature.
->>>>>>> 5ad006a8aebc0479c7e28241b75e7dec478fc5b4
