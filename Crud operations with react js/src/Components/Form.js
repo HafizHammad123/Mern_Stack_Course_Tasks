@@ -39,8 +39,8 @@ export default function Form() {
     updateobject({ uni_id: uniqueid, ...objectdata, [e.target.name]: e.target.value })
   }
 
-  const Submit_data = () => {
-
+  const Submit_data = (e) => {
+    e.preventDefault();
     const get_item=localStorage.getItem('Form_Items')
     if(get_item !==null)
     {
@@ -60,13 +60,6 @@ export default function Form() {
     
     }
    
-  
-
-
-
-
-
-
 
   }
 
@@ -133,7 +126,7 @@ export default function Form() {
       // update_arr([...parse_data])
       localStorage.setItem('Form_Items', JSON.stringify([...parse_data]))
 
-      if(search_field.length === 0 || search_field.length === 1)
+      if(search_field.length >= 0)
       {
         
     const array = localStorage.getItem('Form_Items')
@@ -178,18 +171,18 @@ export default function Form() {
       <h3>
         Students Profile App
       </h3>
-      <form id="form" className="form_container" autoComplete="off">
+      <form id="form" className="form_container" autoComplete="off" onSubmit={Submit_data}>
         <div id="Book_title" className="form_items">
           <label>Name</label>
 
-          <input type="text" name='Name' value={objectdata.Name} onChange={change_handler}>
+          <input type="text" name='Name' value={objectdata.Name} onChange={change_handler} required>
           </input>
 
         </div>
         <div id="Book_Author" className="form_items">
           <label>Address</label>
 
-          <input type="text" name='Address' value={objectdata.Address} onChange={change_handler} >
+          <input type="text" name='Address' value={objectdata.Address} onChange={change_handler} required>
           </input>
 
 
@@ -197,7 +190,7 @@ export default function Form() {
 
         <div id="Book_No" className="form_items">
           <label>City</label>
-          <select name='City' value={objectdata.City} onChange={change_handler}>
+          <select name='City' value={objectdata.City} onChange={change_handler} required>
             <option>Select City</option>
             <option value='Islamabad'>Islamabad</option>
             <option value="Lahore">Lahore</option>
@@ -211,7 +204,7 @@ export default function Form() {
       </form>
 
       {
-        add_button ? <button onClick={() => Submit_data()} className="buttons">Add Data</button> :
+        add_button ? <button form="form"  className="buttons">Add Data</button> :
           <button onClick={Update_data} className="buttons">Update Book</button>
       }
 
